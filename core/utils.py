@@ -25,6 +25,9 @@ class DataAnalysis:
         data.replace(r"^\s*$", np.nan, regex=True, inplace=True)
         data.dropna(inplace=True)
         return None
+     def filter_year(self,data:pd.DataFrame,year:int,column:str):
+       df=data[data[column].str.contains(str(year))]
+       return df
 
     ## Función de correlación de Pearson para el pollutant y factor elegidos
     def Pearson_correlation(self, data: pd.DataFrame, pollutant: str, factor: str):
