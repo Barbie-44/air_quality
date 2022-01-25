@@ -1,8 +1,7 @@
 from utils import DataAnalysis
 from plot import plotter
-
+from plot import VIDEO
 from constants import pollutants, variables
-
 
 class UserInterface:
     def input_retriever(self):
@@ -18,8 +17,9 @@ class UserInterface:
                 self.factor = input(
                     f"Escoge una propiedad de la siguiente lista: {variables.keys()}\n"
                 )
-                pollutant = pollutants.get(self.pollutant)
-                factor = variables.get(str(self.factor))
+                pollutant = pollutants.get(self.pollutant.upper())
+                factor = variables.get(str(self.factor).upper())
+                
                 analysis = DataAnalysis().data_retriever(
                     "raw_data/AirQualityUCI.csv", pollutant, factor
                 )
@@ -44,11 +44,14 @@ class UserInterface:
                     pollutant,
                     factor,
                 )
-                ## El programa se está terminando en plotter(), no regresa a imprimir éste ADIOS
-                print("ADIOS")
+                
+                VIDEO(analysis,pollutant,factor).animator()
+
+                print("El programa ha concluido.")
+
                 return analysis
             except:
-                print("Los datos ingresados son incorrectos")
+                print("Los datos ingresados son incorrectos o hubo un error en la ejecución.")
                 ## Creo que me parece más conveniente que el usuario solo
                 ## escriba la letra "n" en caso de no querer continuar
                 retry = input("¿Quieres intentar de nuevo? s/n\n")
