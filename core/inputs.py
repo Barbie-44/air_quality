@@ -1,11 +1,10 @@
 from utils import DataAnalysis
-from plot import plotter
-
-from constants import pollutants, variables
+from plot import Video, plotter
+from constants import pollutants, variables, years
 
 
 class UserInterface:
-    def input_retriever(self):
+    def __init__(self):
         while True:
             try:
                 ## mejor cambie este print acá porque abajo se veía feon
@@ -18,22 +17,27 @@ class UserInterface:
                 self.factor = input(
                     f"Escoge una propiedad de la siguiente lista: {variables.keys()}\n"
                 )
-                pollutant = pollutants.get(self.pollutant)
-                factor = variables.get(str(self.factor))
+                year = int(input("Escoge un año: 2004, 2005 \n"))
+                if year not in years:
+                    raise Exception()
+                pollutant = pollutants.get(self.pollutant.upper())
+                factor = variables.get(str(self.factor).upper())
                 analysis = DataAnalysis().data_retriever(
                     "raw_data/AirQualityUCI.csv", pollutant, factor
                 )
-                ## A continuación invoco a otra función para darle formato a
+                ## A continuación se invoca a otra función para darle formato a
                 ## la fecha y al contaminante, su definición la pueden encontrar en
                 ## el archivo de utils.py
-                DataAnalysis().data_formatter(analysis, pollutant, factor)
-                ## Moví aquí la función que elimina los registros NaN para que borre
-                ## los registros del dataframe final
-                print(analysis)
+                DataAnalysis().date_formatter(analysis)
+                DataAnalysis().data_formatter(analysis, pollutant)
+                DataAnalysis().data_formatter(analysis, factor)
+                ## Se invoca la función que elimina los registros NaN
+                ## del dataframe final
+                analysis = DataAnalysis().filter_year(analysis, year)
                 DataAnalysis().empty_data_remover(analysis)
                 ## Esta función devuelve el coeficiente de correlación de Pearson
                 ## entre el contaminante y el factor elegidos
-                DataAnalysis().Pearson_correlation(analysis, pollutant, factor)
+                DataAnalysis().pearson_correlation(analysis, pollutant, factor)
                 ## Moví el código que había aquí para graficar y lo metí en una función
                 ## que se dedica exclusivamente al graficado y la pueden encontrar
                 ## en el archivo core/plot.py
@@ -44,16 +48,21 @@ class UserInterface:
                     pollutant,
                     factor,
                 )
-                ## El programa se está terminando en plotter(), no regresa a imprimir éste ADIOS
-                print("ADIOS")
-                return analysis
-            except:
-                print("Los datos ingresados son incorrectos")
-                ## Creo que me parece más conveniente que el usuario solo
+
+                Video(analysis, pollutant, factor).animator()
+
+                print("El programa ha concluido.")
+                return None
+            except Exception as e:
+                print(e)
+                print(
+                    "Los datos ingresados son incorrectos o hubo un error en la ejecución."
+                )
                 ## escriba la letra "n" en caso de no querer continuar
                 retry = input("¿Quieres intentar de nuevo? s/n\n")
                 if retry == "n":
                     break
 
 
-UserInterface().input_retriever()
+# Let's give it a try!
+UserInterface()

@@ -11,6 +11,7 @@ pollutants = {
     "PT08_S5": "PT08.S5(O3)",
 }
 variables = {"T": "T", "H": "AH"}
+years = [2004, 2005]
 
 pollutant_labels = {
     "CO(GT)": "CO (Monóxido de carbono) [mg/m^3]",
