@@ -40,10 +40,6 @@ axes.set_xlim(0, 3000)
 plt.style.use("seaborn")
 axes.set_xlabel("Billion Ton")
 
-lista = []
-for i in range(0, 200):
-    lista.append
-
 
 def animate(i):
     y1 = co[i]
@@ -81,5 +77,9 @@ def animate(i):
 
 
 print("ESPERE UN MOMENTO, GUARDANDO ANIMACIÓN, ESTO PUEDE TARDAR ALGUNOS SEGUNDOS...")
-anim = FuncAnimation(fig, animate, interval=150)
+anim = FuncAnimation(
+    fig,
+    animate,
+    frames=200,
+)
 anim.save("animacion_pollutants.mp4")

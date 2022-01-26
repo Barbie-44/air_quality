@@ -10,6 +10,18 @@ pollutants = {
     "PT08_S4": "PT08.S4(NO2)",
     "PT08_S5": "PT08.S5(O3)",
 }
+numerate = {
+    "0": "CO",
+    "1": "PT08_S1",
+    "2": "NMHC",
+    "3": "C6H6",
+    "4": "PT08_S2",
+    "5": "NOX",
+    "6": "PT08_S3",
+    "7": "NO2",
+    "8": "PT08_S4",
+    "9": "PT08_S5",
+}
 variables = {"T": "T", "H": "AH"}
 years = [2004, 2005]
 
@@ -29,3 +41,6 @@ factor_labels = {
     "T": ["Temperatura", "T [ºC]"],
     "AH": ["Humedad Absoluta", "Humedad Absoluta [g/m^3]"],
 }
+
+FRAMES = 150
+FPS = 30
