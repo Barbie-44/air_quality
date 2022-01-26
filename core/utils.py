@@ -17,14 +17,14 @@ class DataAnalysis:
         data["Date"] = expected
         return data
 
-    def data_formatter(self, data: pd.DataFrame, pollutant: str, factor: str):
+    def date_formatter(self, data: pd.DataFrame):
         data["Date"] = data["Date"] + " " + data["Time"]
         data["Date"] = pd.to_datetime(data["Date"], format="%d/%m/%Y %H.%M.%S")
-        data[pollutant] = pd.to_numeric(
-            data[pollutant].str.replace(",", ".").str.replace("-200", "")
-        )
-        data[factor] = pd.to_numeric(
-            data[factor].str.replace(",", ".").str.replace("-200", "")
+        return data
+
+    def data_formatter(self, data: pd.DataFrame, value: str):
+        data[value] = pd.to_numeric(
+            data[value].str.replace(",", ".").str.replace("-200", "")
         )
         return data
 

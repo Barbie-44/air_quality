@@ -18,7 +18,6 @@ class UserInterface:
                     f"Escoge una propiedad de la siguiente lista: {variables.keys()}\n"
                 )
                 year = int(input("Escoge un año: 2004, 2005 \n"))
-                print(type(year))
                 if year not in years:
                     raise Exception()
                 pollutant = pollutants.get(self.pollutant.upper())
@@ -29,7 +28,9 @@ class UserInterface:
                 ## A continuación se invoca a otra función para darle formato a
                 ## la fecha y al contaminante, su definición la pueden encontrar en
                 ## el archivo de utils.py
-                DataAnalysis().data_formatter(analysis, pollutant, factor)
+                DataAnalysis().date_formatter(analysis)
+                DataAnalysis().data_formatter(analysis, pollutant)
+                DataAnalysis().data_formatter(analysis, factor)
                 ## Se invoca la función que elimina los registros NaN
                 ## del dataframe final
                 analysis = DataAnalysis().filter_year(analysis, year)
@@ -57,7 +58,6 @@ class UserInterface:
                 print(
                     "Los datos ingresados son incorrectos o hubo un error en la ejecución."
                 )
-                ## Creo que me parece más conveniente que el usuario solo
                 ## escriba la letra "n" en caso de no querer continuar
                 retry = input("¿Quieres intentar de nuevo? s/n\n")
                 if retry == "n":
