@@ -1,3 +1,8 @@
+"""
+Estos son los diccionarios estáticos y las constantes que se utilizan en
+los métodos durante la ejecución de todo el programa.
+"""
+
 pollutants = {
     "CO": "CO(GT)",
     "PT08_S1": "PT08.S1(CO)",
@@ -10,7 +15,7 @@ pollutants = {
     "PT08_S4": "PT08.S4(NO2)",
     "PT08_S5": "PT08.S5(O3)",
 }
-numerate = {
+numerate_dic = {
     "0": "CO",
     "1": "PT08_S1",
     "2": "NMHC",

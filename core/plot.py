@@ -66,7 +66,6 @@ class Video:
             "b-",
         )
 
-    # ## Esta función se encarga de hacer la animación
     def animator(self, name: str):
         """
         Se encarga de hacer una animación al llamar de manera iteratiba a la función
@@ -82,7 +81,6 @@ class Video:
         print(
             "ESPERE UN MOMENTO, GUARDANDO ANIMACIÓN, ESTO PUEDE TARDAR ALGUNOS SEGUNDOS..."
         )
-        # Se inicia el proceso de guardado de la animación con formato mp4
         anim.save(f"{name}.mp4", fps=FPS, extra_args=["-vcodec", "libx264"])
         end = time.time()
         print("La animación ha sido guardada.")
